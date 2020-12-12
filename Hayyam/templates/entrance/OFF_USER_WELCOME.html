@@ -1,0 +1,104 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Checkout example · Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/checkout/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{% static 'css/HAYYAM.css' %}" rel="stylesheet" type="text/css">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      body {
+             background-image: url('{% static 'files/Wallpapers/gayet_iyi.gif' %}');
+             background-position: center center;
+             background-repeat: no-repeat;
+             background-attachment: fixed;
+             background-size: cover;
+             background-color:#464646;
+        }
+        @media only screen and (max-width: 767px) {
+        body {
+             background-image: url('{% static 'files/Wallpapers/gayet_iyi-mobile.gif' %}');
+        }
+    }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/form-validation.css' %}" rel="stylesheet">
+  </head>
+  <body class="bg-white-hayyam">
+    <div class="container">
+  <div class="py-5 text-center">
+  </div>
+  <div class="row">
+    <div class="col-md-8 order-md-2 mb-4">
+      <form class="text-center text-light" style="margin-top: 40%;" method="post">
+        {% csrf_token %}
+
+        <input class="col-md-8" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" placeholder="{{ form.username.label }}" required autofocus>
+        <br>
+        <br>
+
+        <input class="col-md-8" style="background-color: white;" type="password" id="{{ form.password.id_for_label }}" name="{{ form.password.html_name }}" placeholder="{{ form.password.label }}" required autofocus>
+        <br>
+        <br>
+        <button class="btn col-md-8 bg-orange2-hayyam text-white-hayyam" type="submit">Hayyam'a giriş yap</button>
+          <br>
+          <br>
+          <a href="#"> Ücretsiz bir Hayyam hesabı oluşturun <i class="fas fa-external-link-alt"></i></a>
+          <br>
+          <br>
+          <a href="#"> Giriş yapamıyor musunuz?</a>
+        <br>
+        <br>
+        {% if error %}
+        <h5 class="cover-heading text-light">{{ error }}</h5>
+        {% endif %}
+    </form>
+    </div>
+    <div class="col-md-4 order-md-1" style="opacity: 1;">
+        <img src="{% static 'files/no-bg-last.png'%}" width="100%">
+        <div style="width: 100%">
+        </div>
+        <div style="margin-top: 70%;">
+            <a class="col-md-12 btn btn-secondary" style="margin-bottom: 1%;" href="#">Akademik giriş</a>
+            <a class="col-md-12 btn bg-reddy-hayyam text-white-hayyam" style="margin-bottom: 1%;" href="#">Yeni öğrenci kaydı</a>
+            <a class="col-md-12 btn bg-orange2-hayyam text-white-hayyam" style="margin-bottom: 1%;" href="#">Yeni öğretmen kaydı</a>
+        </div>
+    </div>
+  </div>
+</div>
+     <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2019-2020 Hayyam</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Gizlilik</a></li>
+          <li class="list-inline-item"><a href="#">Şartlar</a></li>
+          <li class="list-inline-item"><a href="#">Destek</a></li>
+        </ul>
+     </footer>
+<script src="https://kit.fontawesome.com/698648e8fa.js"></script>
+<script src="{% static 'js/jquery-3.3.1.slim.min.js' %}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="{% static 'js/vendor/jquery-slim.min.js' %}"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+        <script src="{% static 'js/form-validation.js' %}"></script></body>
+</html>

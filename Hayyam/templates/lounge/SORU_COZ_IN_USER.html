@@ -1,0 +1,68 @@
+{% extends 'corridor/IN_USER_WELCOME.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="{% static 'css/album.css' %}" rel="stylesheet">
+<link href="{% static 'css/HAYYAM.css' %}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Chilanka|Hepta+Slab|Manjari|PT+Sans+Narrow&display=swap" rel="stylesheet">
+{% endblock %}
+{% block top-navbar %}
+{% endblock %}
+{% block left-navbar-all %}
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">Hakkımızda</h4>
+          <p class="text-muted">Hayyam hk. bilgi</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Hayyam</h4>
+          <ul class="list-unstyled">
+            <li><a href="/hayyam-iletisim/" class="text-white">İletişim</a></li>
+            <li><a href="/hayyam-anasayfa/" class="text-white">Ana Sayfaya Geri Dön</a></li>
+            <li><a href="/profil-sayfam/" class="text-white">Profilim</a></li>
+            <li><a href="/log-out/" class="text-white">Çıkış Yap</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a href="/" class="navbar-brand d-flex align-items-center">
+          <strong style="font-family: 'Manjari', sans-serif;">Soru Çöz - Hayyam</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+{% endblock %}
+{% block icerik %}
+{% endblock %}
+{% block soru-coz-icerik %}
+<main role="main">
+
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">Konular</h1>
+      <form method="post" class="py-5">
+        {% csrf_token %}
+        <div class="form-group text-center">
+            <select id="{{ form.konu.id_for_label }}" style="font-family: &#39;Ek Mukta&#39;;" name="{{ form.konu.html_name }}" class="form-control text-black">
+              {% for konu in konular %}
+              <option class="bg-black text-dark" value="{{ konu.id }}" style="font-family: &#39;Ek Mukta&#39;">{{ konu.isim }}</option>
+              {% endfor %}
+             </select>
+            <br>
+            <br>
+        <input type="submit" class="btn bg-darkblue-hayyam btn-outline-light" value="Seçili konuyla alakalı testleri bul.">
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+{% endblock %}

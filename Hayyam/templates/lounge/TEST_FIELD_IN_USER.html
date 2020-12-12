@@ -1,0 +1,146 @@
+{% extends 'corridor/IN_USER_WELCOME.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="{% static 'css/album.css' %}" rel="stylesheet">
+<link href="{% static 'css/HAYYAM.css' %}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Chilanka|Hepta+Slab|Manjari|PT+Sans+Narrow&display=swap" rel="stylesheet">
+{% endblock %}
+{% block top-navbar %}
+{% endblock %}
+{% block left-navbar-all %}
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">Hakkımızda</h4>
+          <p class="text-muted">Hayyam hk. bilgi</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Hayyam</h4>
+          <ul class="list-unstyled">
+            <li><a href="/hayyam-iletisim/" class="text-white">İletişim</a></li>
+            <li><a href="/hayyam-anasayfa/" class="text-white">Ana Sayfaya Geri Dön</a></li>
+            <li><a href="/profil-sayfam/" class="text-white">Profilim</a></li>
+            <li><a href="/log-out/" class="text-white">Çıkış Yap</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a href="/" class="navbar-brand d-flex align-items-center">
+          <strong style="font-family: 'Manjari', sans-serif;">Soru Çöz - Hayyam</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+{% endblock %}
+
+{% block icerik %}
+{% endblock %}
+{% block soru-coz-icerik %}
+<main role="main">
+  <section class="jumbotron text-left">
+    <p id="demo" class="text-center"></p>
+    <div class="container">
+      <h2 style="font-family: 'Manjari', sans-serif;" id="test_status"></h2>
+      <div style="font-family: 'PT Sans Narrow', sans-serif;" id="test"></div>
+      <button style="font-family: 'Manjari', sans-serif;" class="btn bg-reddy-hayyam text-white-hayyam" id="buton" onclick="checkAnswer()">Bir sonraki soru</button>
+      <br><br>
+      <form id="test_valuer" method="post" action="/testi_tamamla/" style="display: none;">
+        {% csrf_token %}
+        <input type="text" disabled name="ogrenci_id" id="ogrenci_id" />
+        <br>
+        <input type="text" disabled name="test_id" id="test_id" />
+        <br>
+        <input type="text" disabled name="soru_adet" id="soru_adet" />
+        <br>
+        <input type="text" disabled name="dogru_adet" id="dogru_adet" />
+        <br>
+        <input type="text" disabled name="yanlis_adet" id="yanlis_adet" />
+        <br>
+        <br>
+        <input type="submit" id="test_kaydet" value="Testi tamamla" class="btn bg-orange2-hayyam text-white-hayyam manjari">
+      </form>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+{% block script %}
+<script>
+
+// Set the date we're counting down to
+var countDownDate = new Date("{{sure}}").getTime();
+var x = setInterval(function(){
+var now = new Date().getTime();
+var distance = countDownDate - now;
+var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+document.getElementById("demo").innerHTML = minutes + "m " + seconds + "s ";
+if (distance < 0) {clearInterval(x);document.getElementById("demo").innerHTML = "Süreniz Doldu.";
+window.location.assign("/finish_test/{{test.id}}/");
+}}, 1000);
+var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, correct = 0;
+var questions =
+ [{% for soru in sorular %}
+ [ "{{soru.question}}", "{{soru.option1}}", "{{soru.option2}}", "{{soru.option3}}", "{{soru.option4}}", "{{soru.option5}}", "{{soru.answer}}"],
+ {% endfor %}];
+function _(x){
+return document.getElementById(x);
+}
+function renderQuestion(){
+    test = _("test");
+    if(pos >= questions.length){
+        _("buton").style.display = 'none';
+        _("demo").style.display='none';
+        test.innerHTML = "<h2>Toplam soru sayısı: "+questions.length+"<br> Doğru sayınız: "+correct+"<br>Yanlış sayınız: "+(questions.length-correct)+"<br>Bu testteki başarı oranınız: "+(correct/questions.length)*100+"%</h2>";
+        _("test_status").innerHTML = "Testiniz Bitmiştir";
+        _("test_valuer").style.display = 'inline';
+        _("ogrenci_id").value = {{user.id}};
+        _("test_id").value = {{test.id}};
+        _("soru_adet").value = questions.length;
+        _("dogru_adet").value = correct;
+        _("yanlis_adet").value = questions.length-correct;
+        pos = 0;
+        correct = 0;
+        return false;
+    }
+    _("test_status").innerHTML ="Toplam "+questions.length+ " sorudan " +(pos+1)+". sorudasınız.";
+    question = questions[pos][0];
+    chA = questions[pos][1];
+    chB = questions[pos][2];
+    chC = questions[pos][3];
+    chD = questions[pos][4];
+    chE = questions[pos][5];
+    test.innerHTML = "<h3>"+question+"</h3>";
+    test.innerHTML += "<input type='radio' name='choices' value='A'> "+chA+"<br>";
+    test.innerHTML += "<input type='radio' name='choices' value='B'> "+chB+"<br>";
+    test.innerHTML += "<input type='radio' name='choices' value='C'> "+chC+"<br>";
+    test.innerHTML += "<input type='radio' name='choices' value='D'> "+chD+"<br>";
+    test.innerHTML += "<input type='radio' name='choices' value='E'> "+chE+"<br><br>";
+}
+function checkAnswer(){
+    choices = document.getElementsByName("choices");
+    for(var i=0; i<choices.length; i++){
+    if(choices[i].checked){
+      choice = choices[i].value;
+    }
+    }
+    if(choice == questions[pos][6]){
+    	correct++;
+    }
+    pos++;
+    renderQuestion();
+}
+window.addEventListener("load", renderQuestion, false);
+</script>
+{% endblock %}

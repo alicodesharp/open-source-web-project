@@ -1,0 +1,62 @@
+{% extends 'corridor/IN_USER_WELCOME.html' %}
+{% block left-navbar-list %}
+<li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="fas fa-home"></i>
+              Anasayfa <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/profil-sayfam/">
+              <i class="fas fa-user"></i>
+              Profilim
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/hayyam-konular/">
+              <i class="fas fa-book"></i>
+              Konularımız
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/kullanici-listesi/">
+              <i class="fas fa-users"></i>
+              Kullanıcı Listesi
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/soru-coz/">
+              <i class="fas fa-pencil-alt"></i>
+              Soru Çöz
+            </a>
+          </li>
+{% endblock %}
+{% block icerik %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <h2 class="py-3 text-left">Hayyam'daki kullanıcılarımız</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th>Ad-Soyad</th>
+              <th>Kullanıcı Adı</th>
+              <th>Hayyam puanı</th>
+              <th>Tüm konular arasındaki tamamlama yüzdesi</th>
+              <th>Tüm kullanıcılar arasındaki sıralaması</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for user in USERS %}
+            <tr>
+              <td>{{user.first_name}} {{user.last_name}}</td>
+              <td><a class="text-info" href="/konular/{{konu.id}}/">{{ user.username }}</a></td>
+              <td>-Will be prepared-</td>
+              <td>-Will be prepared-</td>
+              <td>-Will be prepared-</td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+        </div>
+</main>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'corridor/IN_USER_WELCOME.html' %}
+{% load static %}
+{% block css %}
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link href="{% static 'css/album.css' %}" rel="stylesheet">
+<link href="{% static 'css/HAYYAM.css' %}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Chilanka|Hepta+Slab|Manjari|PT+Sans+Narrow&display=swap" rel="stylesheet">
+{% endblock %}
+{% block top-navbar %}
+{% endblock %}
+{% block left-navbar-all %}
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">Hakkımızda</h4>
+          <p class="text-muted">Hayyam hk. bilgi</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Hayyam</h4>
+          <ul class="list-unstyled">
+            <li><a href="/hayyam-iletisim/" class="text-white">İletişim</a></li>
+            <li><a href="/hayyam-anasayfa/" class="text-white">Ana Sayfaya Geri Dön</a></li>
+            <li><a href="/profil-sayfam/" class="text-white">Profilim</a></li>
+            <li><a href="/log-out/" class="text-white">Çıkış Yap</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+          <strong style="font-family: 'Manjari', sans-serif;">Soru Çöz - Hayyam</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+{% endblock %}
+{% block icerik %}
+{% endblock %}
+{% block soru-coz-icerik %}
+<main role="main">
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">{{konu.isim}} Testleri</h1>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm bg-white-hayyam" style="font-family: 'PT Sans Narrow', sans-serif;">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Test Adı</th>
+              <th>Soru Adedi</th>
+              <th>Başarı Oranın</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody class="bg-white text-dark">
+            {% for test in testler %}
+            <tr>
+              <td>{{ test.id }}</td>
+              <td>{{ test.test_isim }}</td>
+              <td>{{ soru_adeti }}</td>
+              <td class="text-orange-hayyam">-Will-be-updated-</td>
+                <td><a class="text-reddy-hayyam" href="/test/{{test.id}}">Teste Git</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <p style="font-family: 'Manjari', sans-serif;">
+          <a href="/hayyam-konular/" class="btn btn-primary my-2">Diğer konular</a>
+          <a href="/konular/{{konu.id}}" class="btn btn-secondary my-2 bg-purple2-hayyam"><i class="fas fa-star"></i> Bu konudaki istatistiklerimi göster</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

@@ -1,0 +1,102 @@
+.text-blue-hayyam{
+    color: #0E5FBF;
+}
+.text-orange-hayyam{
+    color: #EBB603;
+}
+.text-purple-hayyam{
+    color: #DD03EB;
+}
+.text-purple2-hayyam{
+    color: #861C74;
+}
+.text-reddy-hayyam{
+    color: #D12257;
+}
+.text-red-hayyam{
+    color: #FF004D;
+}
+.text-green-hayyam{
+    color: #0FE753;
+}
+.text-teal-hayyam{
+    color: #1FA098;
+}
+.text-black-hayyam{
+    color: #000000;
+}
+.text-white-hayyam{
+    color: #FFFFFF;
+}
+.text-darkblue-hayyam{
+    color: #2E1C86;
+}
+.text-brown-hayyam{
+    color: #862E1C;
+}
+/* -------- backgrounds @below ------ */
+.bg-blue-hayyam{
+    background-color: #0E5FBF;
+}
+.bg-orange-hayyam{
+    background-color: #EBB603;
+}
+.bg-purple-hayyam{
+    background-color: #DD03EB;
+}
+.bg-purple2-hayyam{
+    background-color: #861C74;
+}
+.bg-reddy-hayyam{
+    background-color: #D12257;
+}
+.bg-red-hayyam{
+    background-color: #FF004D;
+}
+.bg-green-hayyam{
+    background-color: #0FE753;
+}
+.bg-teal-hayyam{
+    background-color: #1FA098;
+}
+.bg-black-hayyam{
+    background-color: #000000;
+}
+.bg-white-hayyam{
+    background-color: #FFFFFF;
+}
+.bg-darkblue-hayyam{
+    background-color: #2E1C86;
+}
+.bg-brown-hayyam{
+    background-color: #862E1C;
+}
+.bg-orange2-hayyam{
+    background-color: #EE3737;
+}
+.text-orange2-hayyam{
+    color: #EE3737;
+}
+.centered_div {
+   width: Xu;
+   height: Yu;
+   position: absolute;
+   top: 20%;
+   left: 20%;
+   margin-left: -(X/2)u;
+   margin-top: -(Y/2)u;
+}
+.login_position{
+    position:absolute;
+    top:20%;
+    left:15%;
+    max-width:45%;
+    max-height:45%;
+    display:table;
+}
+.manjari{
+    font-family: 'Manjari', sans-serif;
+}
+.pt-sans-narrow{
+    font-family: 'PT Sans Narrow', sans-serif;
+}
